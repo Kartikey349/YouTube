@@ -1,4 +1,13 @@
+import { useSelector } from "react-redux"
+
 export const SideBar = () => {
+
+    //subscribing to the store
+    const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
+
+    //early return
+    if(!isMenuOpen) return null;
+
     return(
         <div className="shadow-md w-50 p-4 flex flex-col gap-5">
             <ul className="border-b-2 flex flex-col gap-2">

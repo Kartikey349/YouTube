@@ -1,11 +1,20 @@
+import {useDispatch} from "react-redux"
+import { toggleMenu } from "../utils/appSlice"
+
 export const Header = () => {
 
+    const dispatch = useDispatch();
+
+    //dispatching an action
+    const toggleMenuHandler = () => {
+        dispatch(toggleMenu())
+    }
 
     return(
         <div className="px-4 h-15 flex items-center justify-between shadow-md">
 
            <div className="flex items-center gap-4">
-                <i className="fa-solid fa-bars text-2xl cursor-pointer"></i>
+                <i className="fa-solid fa-bars text-2xl cursor-pointer" onClick={() => toggleMenuHandler()}></i>
 
                 <img className="w-25" src="https://tse4.mm.bing.net/th/id/OIP._IfEaUssjZQwZ1u92b1_GgHaEK?pid=Api&P=0&h=180" />
            </div>
@@ -14,7 +23,7 @@ export const Header = () => {
                 <input className="border-1 border-gray-400 rounded-l-full w-80 h-8 px-4" type="text" placeholder="search..." />
 
                 <button className="border-r-1 border-gray-400 rounded-r-full h-8 w-14 bg-gray-700 hover:bg-gray-500">
-                    <i class="fa-solid fa-magnifying-glass text-white"></i>
+                    <i className="fa-solid fa-magnifying-glass text-white"></i>
                 </button>
            </div>
 
