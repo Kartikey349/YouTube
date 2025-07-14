@@ -1,9 +1,11 @@
 export const Header = () => {
+
+
     return(
         <div className="px-4 h-15 flex items-center justify-between shadow-md">
 
            <div className="flex items-center gap-4">
-                <i className="fa-solid fa-bars text-2xl"></i>
+                <i className="fa-solid fa-bars text-2xl cursor-pointer"></i>
 
                 <img className="w-25" src="https://tse4.mm.bing.net/th/id/OIP._IfEaUssjZQwZ1u92b1_GgHaEK?pid=Api&P=0&h=180" />
            </div>
