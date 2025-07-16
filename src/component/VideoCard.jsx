@@ -5,7 +5,7 @@ export const VideoCard = ({info}) => {
     const {thumbnails, title, channelTitle} = snippet;
 
     return(
-        <div className="shadow-md p-2 m-2 w-70">
+        <div className="shadow-md p-2 m-2 w-70 h-72">
             <img className="rounded-lg" src={thumbnails.medium.url} />
 
             <div>
