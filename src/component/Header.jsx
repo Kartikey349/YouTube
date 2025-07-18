@@ -7,14 +7,13 @@ export const Header = () => {
 
     const [searchQuery, setSearchQuery] = useState('');
     const [suggestions, setSuggestions] = useState([]);
+    const [showSuggestions, setShowSuggestions] = useState(false);
 
     useEffect(() => {
-
         //make an api call after every key press but if the difference between two api calls is less than 200ms then declinne the api calls
 
         const timer = setTimeout(() =>{
             fetchSearchSuggestion();
-            // console.log("apicall - " + searchQuery)
         },200)
 
         return () => {
@@ -64,7 +63,10 @@ export const Header = () => {
 
            <div className="flex items-center w-8/12 justify-center flex-col">
                 <div className="flex items-center">
-                    <input className="border-1 border-gray-400 rounded-l-full w-80 h-8 px-4" type="text" placeholder="search..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+                    <input className="border-1 border-gray-400 rounded-l-full w-80 h-8 px-4" type="text" placeholder="search..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
+                    onFocus={() => setShowSuggestions(true)}
+                    onBlur={() => setShowSuggestions(false)}
+                    />
 
                     <button className="border-r-1 border-gray-400 rounded-r-full h-8 w-14 bg-gray-700 hover:bg-gray-500">
                         <i className="fa-solid fa-magnifying-glass text-white"></i>
@@ -72,13 +74,11 @@ export const Header = () => {
                 </div>
 
 
-                {suggestions.length > 0  && <div className="absolute top-12 bg-white py-2 w-80 rounded-md shadow-lg px-5 z-50 border-gray-100">
+                {showSuggestions  && suggestions.length > 0 && <div className="absolute top-12 bg-white py-2 w-80 rounded-md shadow-lg px-5 z-50 border-gray-100">
                     <ul>
                         {suggestions.map(s => <li key={s} className="py-2 shadow-sm hover:bg-gray-200">{s}</li> )}
                     </ul>
                 </div>}
-
-
            </div>
 
            <div>
