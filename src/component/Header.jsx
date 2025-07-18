@@ -6,6 +6,7 @@ import { YOUTUBE_SEARCH_API } from "../utils/constant";
 export const Header = () => {
 
     const [searchQuery, setSearchQuery] = useState('');
+    const [suggestions, setSuggestions] = useState([]);
 
     useEffect(() => {
 
@@ -13,11 +14,11 @@ export const Header = () => {
 
         const timer = setTimeout(() =>{
             fetchSearchSuggestion();
-            console.log("apicall - " + searchQuery)
+            // console.log("apicall - " + searchQuery)
         },200)
 
         return () => {
-            clearInterval(timer);
+            clearTimeout(timer);
         }
     },[searchQuery])
 
@@ -41,7 +42,8 @@ export const Header = () => {
     const fetchSearchSuggestion = async () => {
         const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
         const json = await data.json();
-        console.log(json[1]);
+        // console.log(json[1]);
+        setSuggestions(json[1]);
     }
 
     const dispatch = useDispatch();
@@ -52,7 +54,7 @@ export const Header = () => {
     }
 
     return(
-        <div className="px-4 h-15 flex items-center justify-between shadow-md">
+        <div className="px-4 flex items-center justify-between shadow-md h-15">
 
            <div className="flex items-center gap-4">
                 <i className="fa-solid fa-bars text-2xl cursor-pointer" onClick={() => toggleMenuHandler()}></i>
@@ -60,12 +62,23 @@ export const Header = () => {
                 <img className="w-25" src="https://tse4.mm.bing.net/th/id/OIP._IfEaUssjZQwZ1u92b1_GgHaEK?pid=Api&P=0&h=180" />
            </div>
 
-           <div className="flex items-center w-8/12 justify-center">
-                <input className="border-1 border-gray-400 rounded-l-full w-80 h-8 px-4" type="text" placeholder="search..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+           <div className="flex items-center w-8/12 justify-center flex-col">
+                <div className="flex items-center">
+                    <input className="border-1 border-gray-400 rounded-l-full w-80 h-8 px-4" type="text" placeholder="search..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
 
-                <button className="border-r-1 border-gray-400 rounded-r-full h-8 w-14 bg-gray-700 hover:bg-gray-500">
-                    <i className="fa-solid fa-magnifying-glass text-white"></i>
-                </button>
+                    <button className="border-r-1 border-gray-400 rounded-r-full h-8 w-14 bg-gray-700 hover:bg-gray-500">
+                        <i className="fa-solid fa-magnifying-glass text-white"></i>
+                    </button>
+                </div>
+
+
+                {suggestions.length > 0  && <div className="absolute top-12 bg-white py-2 w-80 rounded-md shadow-lg px-5 z-50 border-gray-100">
+                    <ul>
+                        {suggestions.map(s => <li key={s} className="py-2 shadow-sm hover:bg-gray-200">{s}</li> )}
+                    </ul>
+                </div>}
+
+
            </div>
 
            <div>
