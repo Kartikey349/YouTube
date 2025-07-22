@@ -7,6 +7,8 @@ import { YOUTUBE_VIDEO_BYID } from "../utils/constant";
 export const WatchPage = () => {
 
     const [videoInfoById, setVideoInfoById] = useState([]);
+    
+    const [isOpen, setIsOpen] = useState(false);
 
     const [searchParams] = useSearchParams();
     const videoId = searchParams.get("v");
@@ -35,10 +37,13 @@ export const WatchPage = () => {
     const {snippet,statistics} = videoInfoById;
     const {title, channelTitle, description, tags} = snippet;
     const {likeCount, viewCount} = statistics;
-    // console.log(snippet)
-    console.log(videoInfoById)
+    // console.log(tags)
+    // console.log(videoInfoById)
 
-    
+
+    const toggleDescription = () => {
+        setIsOpen(!isOpen);
+    }
     
     
 
@@ -67,7 +72,7 @@ export const WatchPage = () => {
 
                     <div className="py-2 px-3 rounded-3xl bg-gray-200 flex items-center">
 
-                        {viewCount < 1000000 ? Math.floor(likeCount/1000) + "k" : Math.floor(likeCount/1000000) + "M"}
+                        {likeCount < 1000000 ? Math.floor(likeCount/1000) + "k" : Math.floor(likeCount/1000000) + "M"}
 
                         <i className="fa-regular fa-thumbs-up mx-1"></i>
                         <p>|</p>
@@ -78,15 +83,18 @@ export const WatchPage = () => {
                 
 
                 <div className="w-250 bg-gray-200 p-2 rounded-2xl">
-                    <h2 className="font-semibold">Description</h2>
-                    <h4>{viewCount} views</h4>
+                    <h2 className="font-semibold" onClick={() => toggleDescription()}>Description</h2>
+
+                    <hr className="p-1" />
+
+                    {isOpen && <div><h4>{viewCount} views</h4>
                     <h4>{description}</h4>
+                    {tags === undefined ? null: tags.map((tag) => <h4 key={tag} className="text-blue-800">#{tag}</h4>)}
+                    </div>
+                    }
 
-                    {tags.map((tag) => <h4 className="text-blue-800">#{tag}</h4>)}
                 </div>
-
             </div>
-
         </div>
     )
 }
