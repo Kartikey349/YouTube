@@ -72,7 +72,7 @@ export const WatchPage = () => {
 
                     <div className="py-2 px-3 rounded-3xl bg-gray-200 flex items-center">
 
-                        {likeCount < 1000000 ? Math.floor(likeCount/1000) + "k" : Math.floor(likeCount/1000000) + "M"}
+                        {likeCount < 1000000 ? Math.floor(likeCount/1000) + "K" : Math.floor(likeCount/1000000) + "M"}
 
                         <i className="fa-regular fa-thumbs-up mx-1"></i>
                         <p>|</p>
