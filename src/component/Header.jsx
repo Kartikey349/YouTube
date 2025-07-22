@@ -50,7 +50,7 @@ export const Header = () => {
     const fetchSearchSuggestion = async () => {
         const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
         const json = await data.json();
-        console.log(json[1]);
+        // console.log(json[1]);
         setSuggestions(json[1]);
 
         dispatch(cacheResults({
