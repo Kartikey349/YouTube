@@ -1,30 +1,12 @@
-import { useEffect, useState } from "react"
-import { CATEGORY_API } from "../utils/constant"
 import { Button } from "./Button"
 
+const List = ["All", "gaming", "Sports","Weeknd","Musics","Movies","comedy","live","Asmr","Dnace"]
 
 export const ButtonList = () => {
-
-    const [category, setCategory] = useState([]);
-    
-    
-    
-    useEffect(() => {
-        fetchCategory();
-    }, []);
-
-    const fetchCategory = async () => {
-        const data = await fetch(CATEGORY_API);
-        const json = await data.json();
-        // console.log(json)
-        setCategory(json.items)
-    };
-
-    
-    return (
+    return(
         <div className="flex overflow-x-auto w-full whitespace-nowrap pt-4">
-            {category.map((item) => {
-               return <Button key={item.id} name={item} />
+            {List.map((item, index) => {
+               return <Button key={index} name={item} />
             })}
         </div>
     )
