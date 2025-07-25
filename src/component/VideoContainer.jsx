@@ -16,11 +16,11 @@ export const VideoContainer = () => {
 
         const json = await data.json();
         
-        setVideos(json.items);
         // console.log(json.items)
+        setVideos(json.items);
     }
 
-    return(
+    return videos === undefined ? <p>loading...</p> : (
         <div className="flex flex-wrap justify-center">
             {videos.map((video) => (
                <Link key={video.id} to={"/watch?v=" + video.id} > <VideoCard  info={video} /> </Link> ) )}

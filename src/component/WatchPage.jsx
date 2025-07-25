@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux"
 import { closeMenu } from "../utils/appSlice";
 import { useSearchParams } from "react-router-dom";
 import { YOUTUBE_VIDEO_BYID } from "../utils/constant";
+import { CommentsContainer } from "./CommentsContainer";
 
 export const WatchPage = () => {
 
@@ -50,7 +51,7 @@ export const WatchPage = () => {
     return(
         <div className="p-4">
             <div>
-                <iframe width="1000" height="500" className="rounded-xl" src={"https://www.youtube.com/embed/" + videoId} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                <iframe width="1000" height="500" className="rounded-xl " src={`https://www.youtube.com/embed/${videoId}?autoplay=0`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
             </div>
 
             <hr className="mt-3 mb-3" />
@@ -85,7 +86,7 @@ export const WatchPage = () => {
                 <div className="w-250 bg-gray-200 p-2 rounded-2xl">
                     <h2 className="font-semibold" onClick={() => toggleDescription()}>Description</h2>
 
-                    <hr className="p-1" />
+                    <hr className="p-1 " />
 
                     {isOpen && <div><h4>{viewCount} views</h4>
                     <h4>{description}</h4>
@@ -95,6 +96,8 @@ export const WatchPage = () => {
 
                 </div>
             </div>
+
+            <CommentsContainer />
         </div>
     )
 }
