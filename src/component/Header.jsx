@@ -3,6 +3,9 @@ import { toggleMenu } from "../utils/appSlice"
 import { useEffect, useState } from "react";
 import { YOUTUBE_SEARCH_API } from "../utils/constant";
 import { cacheResults } from "../utils/searchSlice";
+import { useNavigate } from "react-router-dom";
+import { showVideo } from "../utils/searchVideoSlice";
+import { clearShowVideo } from "../utils/searchVideoSlice";
 
 export const Header = () => {
 
@@ -10,6 +13,7 @@ export const Header = () => {
     const [suggestions, setSuggestions] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     
     const searchCache = useSelector((store) => store.search);
@@ -59,6 +63,23 @@ export const Header = () => {
     }
 
 
+
+    const searchVideo = async () => {
+
+        dispatch(clearShowVideo());
+
+        if(searchQuery.length > 0){
+            const data = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchQuery}&maxResults=5&type=video&key=AIzaSyAqV-cVc1ohaRbxXo60zG3zKuJWHLKujeg`);
+            
+            
+            const json = await data.json();
+            
+            dispatch(showVideo(json.items))
+            navigate(`/result?search=${searchQuery}`)
+        }
+    }
+
+
     //dispatching an action
     const toggleMenuHandler = () => {
         dispatch(toggleMenu())
@@ -70,25 +91,30 @@ export const Header = () => {
            <div className="flex items-center gap-4">
                 <i className="fa-solid fa-bars text-2xl cursor-pointer" onClick={() => toggleMenuHandler()}></i>
 
-                <img className="w-25" src="https://tse4.mm.bing.net/th/id/OIP._IfEaUssjZQwZ1u92b1_GgHaEK?pid=Api&P=0&h=180" />
+                <img className="w-25 hidden sm:block" src="https://tse4.mm.bing.net/th/id/OIP._IfEaUssjZQwZ1u92b1_GgHaEK?pid=Api&P=0&h=180" />
            </div>
 
            <div className="flex items-center w-8/12 justify-center flex-col">
                 <div className="flex items-center">
-                    <input className="border-1 border-gray-400 rounded-l-full w-80 h-8 px-4" type="text" placeholder="search..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
+                    <input className="border-1 border-gray-400 rounded-l-full w-30 h-8 px-4 sm:w-80" type="text" placeholder="search..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => setShowSuggestions(true)}
                     onBlur={() => setShowSuggestions(false)}
                     />
 
-                    <button className="border-r-1 border-gray-400 rounded-r-full h-8 w-14 bg-gray-700 hover:bg-gray-500">
-                        <i className="fa-solid fa-magnifying-glass text-white"></i>
-                    </button>
+                    
+                        <button className="border-r-1 border-gray-400 rounded-r-full h-8 w-14 bg-gray-700 hover:bg-gray-500"
+
+                        onClick={searchVideo}
+                        >
+                            <i className="fa-solid fa-magnifying-glass text-white"></i>
+                        </button>
                 </div>
 
 
                 {showSuggestions  && suggestions.length > 0 && <div className="absolute top-12 bg-white py-2 w-80 rounded-md shadow-lg px-5 z-50 border-gray-100">
                     <ul>
-                        {suggestions.map(s => <li key={s} className="py-2 shadow-sm hover:bg-gray-200">{s}</li> )}
+                        {suggestions.map(s => <li onMouseDown={() => setSearchQuery(s)}
+                        key={s} className="py-2 shadow-sm hover:bg-gray-200">{s}</li> )}
                     </ul>
                 </div>}
            </div>
