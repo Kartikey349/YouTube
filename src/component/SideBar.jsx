@@ -10,7 +10,7 @@ export const SideBar = () => {
     if(!isMenuOpen) return null;
 
     return(
-        <div className="shadow-md w-38 p-4 flex flex-col gap-5 shrink-0">
+        <div className="shadow-md w-38 p-4 flex flex-col gap-5 shrink-0 absolute top-15 bg-gray-200 rounded-lg">
             <ul className="border-b-2 flex flex-col gap-2">
                 <Link to={"/"}>
                     <li>Home</li>
