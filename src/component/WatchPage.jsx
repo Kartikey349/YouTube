@@ -54,7 +54,7 @@ export const WatchPage = () => {
             <div className="">
                 <div className="md:flex gap-4 ">
                     <div className=" flex flex-col md:w-8/12 items-center">
-                <iframe width="1000" height="500" className="rounded-xl w-100 h-75 sm:w-full sm:h-95 md:h-140" src={`https://www.youtube.com/embed/${videoId}?autoplay=1`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                <iframe width="1000" height="500" className="rounded-xl w-full h-75 sm:w-full sm:h-95 md:h-140" src={`https://www.youtube.com/embed/${videoId}?autoplay=1`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
 
 
            
@@ -69,7 +69,7 @@ export const WatchPage = () => {
 
                     <button className="text-white bg-black py-2 px-3 rounded-3xl">Join</button>
 
-                    <div className="py-2 px-3 rounded-3xl bg-gray-200 flex items-center gap-1">
+                    <div className="hidden py-2 px-3 rounded-3xl bg-gray-200 sm:flex items-center gap-1">
                         <i className="fa-regular fa-bell"></i>
                         <h4>Subcribed</h4>
                     </div>

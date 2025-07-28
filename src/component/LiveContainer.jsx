@@ -74,7 +74,7 @@ const  messages = useSelector((store) => store.chat.message)
         }
     </div>
     <form>
-            <input value={chatMessage} className="border-1 border-gray-800 px-2 py-1 rounded-lg mt-1 " type="text" onChange={(e) => setChatMessage(e.target.value)} />
+            <input value={chatMessage} className="border-1 border-gray-800 px-2 py-1 rounded-lg mt-1 w-65 " type="text" onChange={(e) => setChatMessage(e.target.value)} />
 
             <button onClick={(e) => {
                 e.preventDefault();
@@ -84,7 +84,7 @@ const  messages = useSelector((store) => store.chat.message)
             }))
                 setChatMessage("")
         }
-            } className="border-1 px-2 py-1 ml-2 rounded-lg bg-red-900 text-white">send</button>
+            } className="border-1 px-2 py-1 ml-2 rounded-lg bg-red-900 text-white font-bold">send</button>
         </form>
         
     </div>
