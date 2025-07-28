@@ -53,15 +53,15 @@ export const WatchPage = () => {
         <div className="p-4 w-full">
             <div className="">
                 <div className="md:flex gap-4 ">
-                    <div className=" flex flex-col items-center md:w-8/12">
-                <iframe width="1000" height="500" className="rounded-xl w-100 h-75 sm:w-full sm:h-95 md:h-140 " src={`https://www.youtube.com/embed/${videoId}?autoplay=1`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                    <div className=" flex flex-col md:w-8/12 items-center">
+                <iframe width="1000" height="500" className="rounded-xl w-100 h-75 sm:w-full sm:h-95 md:h-140" src={`https://www.youtube.com/embed/${videoId}?autoplay=1`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
 
 
            
 
 
-            <div className="md:w-full">
-                <h1 className="font-bold mt-2 text-2xl w-full md:w-7/12">{title} | {channelTitle}</h1>
+            <div className="w-full md:w-full">
+                <h1 className="font-bold mt-2 text-2xl w-full sm:w-full md:w-full">{title} | {channelTitle}</h1>
                 
                 <div className="flex items-center gap-2 py-3">
                     <i className="fa-solid fa-user border-2 p-2 rounded-full"></i>
