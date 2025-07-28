@@ -110,11 +110,11 @@ const CommentList = ({comments}) => {
         <div>
             {comments.map((comment,index) => {
                 return (
-                    <div>
+                    <div key={index}>
                         <Comment key={index} data={comment} />
 
                         <div className="ml-5 pl-5 border-l-1">
-                            <CommentList comments={comment.replies} />
+                            <CommentList key={index} comments={comment.replies} />
                         </div>
                     </div>
                 )
@@ -125,7 +125,8 @@ const CommentList = ({comments}) => {
 }
 
 export const CommentsContainer = () => {
-    return <div>
+    return <div className="w-full sm:w-full md:w-8/12 ">
+        <h1 className="font-semibold mt-2">Comments:</h1>
         <CommentList comments={commentData} />
     </div>
 }

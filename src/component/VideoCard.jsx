@@ -9,7 +9,7 @@ export const VideoCard = ({info}) => {
             <img className="rounded-lg" src={thumbnails.medium.url} />
 
             <div>
-                <p className="font-bold">{title}</p>
+                <p className="font-bold line-clamp-2">{title}</p>
                 <h4>{channelTitle}</h4>
                 <h4>{statistics.viewCount} views</h4>
             </div>

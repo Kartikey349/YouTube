@@ -4,6 +4,7 @@ import { closeMenu } from "../utils/appSlice";
 import { useSearchParams } from "react-router-dom";
 import { YOUTUBE_VIDEO_BYID } from "../utils/constant";
 import { CommentsContainer } from "./CommentsContainer";
+import { LiveContainer } from "./LiveContainer";
 
 export const WatchPage = () => {
 
@@ -49,16 +50,18 @@ export const WatchPage = () => {
     
 
     return(
-        <div className="p-4">
-            <div>
-                <iframe width="1000" height="500" className="rounded-xl " src={`https://www.youtube.com/embed/${videoId}?autoplay=0`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
-            </div>
+        <div className="p-4 w-full">
+            <div className="">
+                <div className="md:flex gap-4 ">
+                    <div className=" flex flex-col items-center md:w-8/12">
+                <iframe width="1000" height="500" className="rounded-xl w-100 h-75 sm:w-full sm:h-95 md:h-140 " src={`https://www.youtube.com/embed/${videoId}?autoplay=1`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
 
-            <hr className="mt-3 mb-3" />
+
+           
 
 
-            <div>
-                <h1 className="font-bold mt-2 text-2xl w-250 ">{title} | {channelTitle}</h1>
+            <div className="md:w-full">
+                <h1 className="font-bold mt-2 text-2xl w-full md:w-7/12">{title} | {channelTitle}</h1>
                 
                 <div className="flex items-center gap-2 py-3">
                     <i className="fa-solid fa-user border-2 p-2 rounded-full"></i>
@@ -80,15 +83,20 @@ export const WatchPage = () => {
                         <i className="fa-regular fa-thumbs-down ml-1"></i>
                     </div>
                 </div>
+                </div>
+                </div>
 
                 
+                <LiveContainer />
 
-                <div className="w-250 bg-gray-200 p-2 rounded-2xl">
+            </div> 
+
+                <div className=" bg-gray-200 p-2 rounded-2xl w-full  sm:w-full md:w-8/12 mt-2">
                     <h2 className="font-semibold" onClick={() => toggleDescription()}>Description</h2>
 
-                    <hr className="p-1 " />
 
                     {isOpen && <div><h4>{viewCount} views</h4>
+                    <hr className="p-1 " />
                     <h4>{description}</h4>
                     {tags === undefined ? null: tags.map((tag) => <h4 key={tag} className="text-blue-800">#{tag}</h4>)}
                     </div>
