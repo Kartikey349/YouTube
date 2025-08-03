@@ -9,7 +9,7 @@ import { LiveContainer } from "./LiveContainer";
 export const WatchPage = () => {
 
     const [videoInfoById, setVideoInfoById] = useState([]);
-    
+    const [openLive, setOpenLive] = useState(true)
     const [isOpen, setIsOpen] = useState(false);
 
     const [searchParams] = useSearchParams();
@@ -65,9 +65,12 @@ export const WatchPage = () => {
                 
                 <div className="flex items-center gap-2 py-3">
                     <i className="fa-solid fa-user border-2 p-2 rounded-full"></i>
-                    <h2 className="font-semibold">{channelTitle}</h2>
+                    <div>   
+                        <h2 className="font-semibold m-0">{channelTitle}</h2>
+                        <h5 className="text-gray-800 m-0">4.5m subscribers</h5>
+                    </div>
 
-                    <button className="text-white bg-black py-2 px-3 rounded-3xl">Join</button>
+                    <button className="hidden text-white bg-black py-2 px-3 rounded-3xl sm:block">Join</button>
 
                     <div className="hidden py-2 px-3 rounded-3xl bg-gray-200 sm:flex items-center gap-1">
                         <i className="fa-regular fa-bell"></i>
@@ -82,13 +85,15 @@ export const WatchPage = () => {
                         <p>|</p>
                         <i className="fa-regular fa-thumbs-down ml-1"></i>
                     </div>
+
+                    <button onClick={() => setOpenLive(!openLive)} className="p-2  bg-red-900 text-white font-semibold rounded-3xl">Live</button>
                 </div>
                 </div>
                 </div>
 
                 
-                <LiveContainer />
-
+                {openLive && <LiveContainer />
+}
             </div> 
 
                 <div className=" bg-gray-200 p-2 rounded-2xl w-full  sm:w-full md:w-8/12 mt-2">
