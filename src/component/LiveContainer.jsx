@@ -36,7 +36,17 @@ export const LiveContainer = () => {
 
 function generate() {
  return nameList[Math.floor(Math.random() * nameList.length)];
-    };
+};
+
+function makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
 
 
 const dispatch = useDispatch()
@@ -44,26 +54,16 @@ const dispatch = useDispatch()
 const  messages = useSelector((store) => store.chat.message)
 
     useEffect(() => {
-
-        
-
         const timer = setInterval(() => {
-
             const info= {
-            name: generate(),
-            text: ("hajdahka") 
+                name: generate(),
+                text: makeid(20) 
         }
-
             dispatch(addMessage(info))
         },1000)
 
-        return () => clearInterval(timer)
-        
+        return () => clearInterval(timer) 
 },[])
-
-
-
-
 
 
     return <div className="sm:w-full md:w-4/12 h-100 md:h-120 mb-25">
@@ -79,8 +79,8 @@ const  messages = useSelector((store) => store.chat.message)
             <button onClick={(e) => {
                 e.preventDefault();
                 dispatch(addMessage({
-                name: "kartikey",
-                text: chatMessage
+                    name: "kartikey",
+                    text: chatMessage
             }))
                 setChatMessage("")
         }
